@@ -15,8 +15,6 @@ class CloudTravel {
     const distance = Array.apply(null, {length: this.noOfAirports}).map(e => Infinity)
     const isVertixProcessed = Array.apply(null, {length: this.noOfAirports}).map(e => false)
     
-    console.log(distance);
-    console.log(isVertixProcessed);
     distance[this.source] = 0;
     
     Array.apply(null, {
@@ -61,15 +59,14 @@ class CloudTravel {
 
   shortestTripConst (nodeA, nodeB) {
     //return 1;
-    const lat1 = this.latitude[nodeA]; 
-    const lon1 = this.longitude[nodeA]; 
-    const lat2 = this.latitude[nodeB];
-    const lon2 = this.longitude[nodeB];
+    const lat1 = Math.PI * this.latitude[nodeA]/180; 
+    const lon1 = Math.PI * this.longitude[nodeA]/180; 
+    const lat2 = Math.PI * this.latitude[nodeB]/180;
+    const lon2 =  Math.PI * this.longitude[nodeB]/180;
     return  this.radius * Math.acos(
       Math.sin(lat1) * Math.sin(lat2) + Math.cos(lat1) * Math.cos(lat2) * Math.cos(lon1 - lon2)
     );
   }
-
 }
 var airplaneCanTavel = [
   [2],
@@ -79,8 +76,5 @@ var airplaneCanTavel = [
 
 const latitude = [0, 0, 70];
 const longitude = [90, 0, 45];
-
 const obj = new CloudTravel(airplaneCanTavel, latitude, longitude, 0, 1);
-
-
 console.log(obj.shortestCourierTrip());
